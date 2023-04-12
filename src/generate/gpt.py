@@ -20,6 +20,7 @@ import datetime
 import gettext
 import logging
 from dataclasses import asdict
+from random import shuffle
 
 import pandas as pd
 
@@ -43,7 +44,8 @@ def generate_gpt_query(symbol: str,
                        market_indicators_max_value_count: int = 3,
                        stock_indicators_max_age: int = 3,
                        stock_values_max_age: int = 31,
-                       max_news_age: int = 7
+                       max_news_age: int = 7,
+                       max_news_count: int = 7,
                        ) -> str:
     """ Generates a GPT query for the given stock symbol.
     Args:
@@ -59,6 +61,7 @@ def generate_gpt_query(symbol: str,
         stock_indicators_max_age (int): The maximum age of stock indicators to use in days.
         stock_values_max_age (int): The maximum age of stock values to use in days.
         max_news_age (int): The maximum age of news articles to use in days.
+        max_news_count (int): The maximum number of news articles to use.
     """
 
     if for_date is None:
@@ -112,7 +115,12 @@ def generate_gpt_query(symbol: str,
     for article in news_repo.get(symbol) or []:
         date_news = datetime.date.fromtimestamp(article.published_at.timestamp())
         if for_date >= date_news >= (for_date - datetime.timedelta(days=max_news_age)):
-            relevant_news.append(article)
+            if article.title not in [x.title for x in relevant_news]: # don't add duplicates
+                relevant_news.append(article)
+
+    # shuffle and limit news
+    shuffle(relevant_news)
+    relevant_news = relevant_news[:max_news_count]
 
     query = "Today is: {}\n".format(for_date.strftime("%Y-%m-%d"))
     query += "We want to do an analysis and find a strategy for the stock `{symbol}`. All values considered to be in USD $.\n".format(
@@ -162,9 +170,10 @@ def generate_gpt_query(symbol: str,
         query += "- No news available\n"
 
     for news_article in relevant_news:
-        query += "- {date}: `{title}` (Source: {source})\n".format(title=news_article.title,
-                                                                   source=news_article.source,
-                                                                   date=news_article.published_at.strftime(
+        query += "- {date}: `{title}\n{content}`\n(Source: {source})\n".format(title=news_article.title,
+                                                                              source=news_article.source,
+                                                                              content=news_article.summary or '',
+                                                                              date=news_article.published_at.strftime(
                                                                            "%Y-%m-%d"))
     query += "\n\n"
     query += """

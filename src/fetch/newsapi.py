@@ -14,6 +14,8 @@
 # #######################################################################
 # Brief: Functions to fetch from the NewsAPI                      		#
 #########################################################################
+from __future__ import annotations
+
 import datetime
 
 import requests
@@ -25,11 +27,13 @@ from exceptions.base import StockGptException
 def fetch_latest_stock_news(stock_symbol: str,
                             api_key: str,
                             page: int = 1,
-                            page_size: int = 15) -> TNewsArticles:
+                            stock_name: str | None=None,
+                            page_size: int = 15
+                            ) -> TNewsArticles:
     # Set up the endpoint and parameters
     url = 'https://newsapi.org/v2/everything'
     params = {
-        'q': f'{stock_symbol} stock',
+        'q': f'({stock_symbol} stock)'+f' OR {stock_name}' if stock_name else '',
         'sortBy': 'publishedAt',
         'apiKey': api_key,
         'language': 'en',
@@ -50,7 +54,8 @@ def fetch_latest_stock_news(stock_symbol: str,
                 title=article['title'],
                 source=article['source']['name'],
                 published_at=datetime.datetime.fromisoformat(article['publishedAt']),
-                url=article['url']
+                url=article['url'],
+                summary=article['content'] or article['description'],
             )
             for article in articles
         ]

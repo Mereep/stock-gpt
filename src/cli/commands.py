@@ -24,6 +24,7 @@ import pyperclip
 from fetch.fredapi import update_market_indicators
 from fetch.newsapi import fetch_latest_stock_news
 from fetch.stocks import update_stock_symbol, update_all_stock_indicators_for_active_stocks, update_stock_indicators
+from fetch.yfinance import fetch_basic_stock_info
 from generate.gpt import generate_gpt_query
 from misc.config import AppConfig
 import gettext
@@ -115,6 +116,7 @@ def update_news_data(
         logger: logging.Logger,
         repo: INewsArticleRepository,
         news_api_key: str,
+        stock_name: str | None = None,
         page_size: int = 15):
     """ Refreshes the news data for the given stock symbol
     Args:
@@ -122,11 +124,13 @@ def update_news_data(
         logger (logging.Logger): The logger to use
         repo (INewsArticleRepository): The repository to use
         news_api_key (str): The news api key to use
+        stock_name (str, optional): The stock name. If given the news can be queried more openly.
         page_size (int, optional): The number of articles to fetch. Defaults to 15.
     """
     logger.info(_("Collecting news for: {symbol}").format(symbol=symbol))
     news = fetch_latest_stock_news(stock_symbol=symbol,
                                    page_size=page_size,
+                                   stock_name=stock_name,
                                    api_key=news_api_key)
 
     repo.store(key=symbol, value=news)
@@ -148,6 +152,7 @@ def generate_query(
         stock_indicators_to_update: list[str] | None = None,
         news_api_key: str | None = None,
         prompt_to_clipboard: bool = False,
+        max_news_count: int = 7,
 ):
     """ Generates a query for the given stock symbol
 
@@ -170,6 +175,7 @@ def generate_query(
         stock_indicators_to_update (list[str] | None, optional): The stock indicators to update.
         Only needed when updating the stock symbol.
         prompt_to_clipboard (bool, optional): Whether to prompt the query to the clipboard.
+        max_news_count (int, optional): The maximum number of news articles to query.
     """
     if update_stock_symbol:
         logger.info(_("Updating stock symbol data for: {symbol} (Code: 29408230)").format(symbol=symbol))
@@ -179,14 +185,18 @@ def generate_query(
             symbol=symbol,
         )
 
+        stock_general_info = fetch_basic_stock_info(symbol=symbol)
+
         update_news_data(symbol=symbol,
                          repo=news_repo,
                          news_api_key=news_api_key,
-                         logger=logger, )
+                         logger=logger,
+                         stock_name=stock_general_info.name,
 
-        stock_info = stock_value_repo.get(key=symbol)
+                         )
+        stock_trend = stock_value_repo.get(key=symbol)
         update_stock_indicators(
-            stock_info=stock_info,
+            stock_info=stock_trend,
             repo=stock_indicator_repo,
             indicators_to_update=stock_indicators_to_update,
             logger=logger,
@@ -204,6 +214,7 @@ def generate_query(
         stock_indicators_max_age=stock_indicators_max_age,
         stock_values_max_age=stock_values_max_age,
         max_news_age=max_news_age,
+        max_news_count=max_news_count,
     )
 
     if prompt_to_clipboard:

@@ -20,7 +20,6 @@ import datetime
 import logging
 
 import requests
-import yfinance
 
 from datatypes.stock_data import StockDataInfo, StockDataChartEntry
 from datatypes.stock_indicator import StockIndicators

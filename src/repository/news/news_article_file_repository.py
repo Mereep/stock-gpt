@@ -28,6 +28,7 @@ from repository.news.i_news_article_repository import INewsArticleRepository
 
 import gettext
 
+_ = gettext.gettext
 
 class NewsArticleFileRepository(INewsArticleRepository):
     _base_path: Path
@@ -58,10 +59,10 @@ class NewsArticleFileRepository(INewsArticleRepository):
         news_article_base_path = self._base_path
         effective_path = news_article_base_path / f'{key}.csv'
         if not effective_path.exists():
-            self.log_info(_('Creating new news article file for {key} (Code: 42342342)'))
+            self.log_info(_(f"Creating new news article file for {key} (Code: 42342342)"))
             df_old = pd.DataFrame(columns=['title', 'source', 'published_at', 'url', 'summary'])
         else:
-            self.log_info(_('Writing to existing news file {key} (Code: 2342834092)'))
+            self.log_info(_(f"Writing to existing news file {key} (Code: 2342834092)"))
             df_old = pd.read_csv(effective_path, index_col=None, parse_dates=['published_at'])
 
         df_new = pd.DataFrame({'title': [article.title for article in value],

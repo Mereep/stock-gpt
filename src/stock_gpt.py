@@ -20,6 +20,7 @@ import gettext
 
 from cli.commands import update_market_indicator_data, update_stock_symbol_data, update_stock_indicator_data, \
     update_news_data, generate_query
+from fetch.yfinance import fetch_basic_stock_info
 from log.logger import get_default_cli_logger
 from misc.app_state import get_app_config
 from repository.market_indicator.market_indicator_file_repository import MarketIndicatorFileRepository
@@ -146,6 +147,11 @@ def parse_arguments():
                                  action='store_true',
                                  help=_("Copy the generated query to the clipboard"))
 
+    generate_parser.add_argument('--max-news-count',
+                                 default=7,
+                                 type=int,
+                                 help=_("Maximum number of news articles to include (default: 7)"))
+
     return parser.parse_args()
 
 
@@ -203,10 +209,12 @@ def main():
                 symbols = repo_stock_value.list_keys()
 
             for symbol in symbols:
+                stock_data = fetch_basic_stock_info(symbol=symbol)
                 update_news_data(
                     repo=NewsArticleFileRepository(base_path=get_app_config().default_news_article_base_dir,
                                                    logger=get_default_cli_logger()),
                     symbol=symbol,
+                    stock_name=stock_data.name,
                     news_api_key=get_app_config().news_api_key,
                     logger=get_default_cli_logger(),
                     page_size=args.page_size,
@@ -247,6 +255,7 @@ def main():
                 news_api_key=get_app_config().news_api_key,
                 stock_indicators_to_update=get_app_config().default_stock_indicators,
                 prompt_to_clipboard=args.to_clipboard,
+                max_news_count=args.max_news_count,
             )
 
 
