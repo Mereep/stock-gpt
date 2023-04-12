@@ -159,11 +159,12 @@ query generate --symbol [--update_symbol UPDATE_SYMBOL] [--market_indicators_max
 ```
     --symbol: The stock symbol for the query. Required. 
     --update-symbol: Whether to update the stock symbol data before generating the query. Defaults to False.
-    --market_indicators_max_value_count: The maximum number of market indicator values to consider. Defaults to 3.
-    --stock_indicators_max_age: The maximum age of stock indicators in days. Defaults to 3.
-    --stock_values_max_age: The maximum age of stock values in days. Defaults to 31.
-    --max_news_age: The maximum age of news articles in days. Defaults to 7.
+    --market-indicators-max-value-count: The maximum number of market indicator values to consider. Defaults to 3.
+    --stock-indicators-max-age: The maximum age of stock indicators in days. Defaults to 3.
+    --stock-values-max-age: The maximum age of stock values in days. Defaults to 31.
+    --max-news-age: The maximum age of news articles in days. Defaults to 7.
     --day: The date in the format `YYYY-MM-DD` for the query. Defaults to the current date.
+    --top-clipboard: Whether to copy the generated query to the clipboard. Defaults to False. 
 ## Examples
 - Collect / Update specific stock symbols (e.g., AAPL and MSFT) with data from the last 30 days: 
 ```bash

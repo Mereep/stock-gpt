@@ -113,22 +113,22 @@ def parse_arguments():
                                  required=True,
                                  help=_("Symbol to generate the query for"))
 
-    generate_parser.add_argument('--market_indicators_max_value_count',
+    generate_parser.add_argument('--market-indicators-max-value-count',
                                  type=int,
                                  default=3,
                                  help=_("Maximum number of market indicator values to consider (default: 3)"))
 
-    generate_parser.add_argument('--stock_indicators_max_age',
+    generate_parser.add_argument('--stock-indicators-max-age',
                                  type=int,
                                  default=3,
                                  help=_("Maximum age of stock indicators in days (default: 3)"))
 
-    generate_parser.add_argument('--stock_values_max_age',
+    generate_parser.add_argument('--stock-values-max-age',
                                  type=int,
                                  default=31,
                                  help=_("Maximum age of stock values in days (default: 31)"))
 
-    generate_parser.add_argument('--max_news_age',
+    generate_parser.add_argument('--max-news-age',
                                  type=int,
                                  default=7,
                                  help=_("Maximum age of news articles in days (default: 7)"))
@@ -141,6 +141,10 @@ def parse_arguments():
     generate_parser.add_argument('--update-symbol',
                                  action='store_true',
                                  help=_("Update symbol data before generating the query"))
+
+    generate_parser.add_argument('--to-clipboard',
+                                 action='store_true',
+                                 help=_("Copy the generated query to the clipboard"))
 
     return parser.parse_args()
 
@@ -242,6 +246,7 @@ def main():
                 update_stock_symbol=args.update_symbol,
                 news_api_key=get_app_config().news_api_key,
                 stock_indicators_to_update=get_app_config().default_stock_indicators,
+                prompt_to_clipboard=args.to_clipboard,
             )
 
 

@@ -19,6 +19,8 @@ from __future__ import annotations
 import datetime
 import logging
 
+import pyperclip
+
 from fetch.fredapi import update_market_indicators
 from fetch.newsapi import fetch_latest_stock_news
 from fetch.stocks import update_stock_symbol, update_all_stock_indicators_for_active_stocks, update_stock_indicators
@@ -145,6 +147,7 @@ def generate_query(
         update_stock_symbol: bool = False,
         stock_indicators_to_update: list[str] | None = None,
         news_api_key: str | None = None,
+        prompt_to_clipboard: bool = False,
 ):
     """ Generates a query for the given stock symbol
 
@@ -166,6 +169,7 @@ def generate_query(
         only needed when updating the stock symbol
         stock_indicators_to_update (list[str] | None, optional): The stock indicators to update.
         Only needed when updating the stock symbol.
+        prompt_to_clipboard (bool, optional): Whether to prompt the query to the clipboard.
     """
     if update_stock_symbol:
         logger.info(_("Updating stock symbol data for: {symbol} (Code: 29408230)").format(symbol=symbol))
@@ -184,7 +188,7 @@ def generate_query(
         update_stock_indicators(
             stock_info=stock_info,
             repo=stock_indicator_repo,
-            indicators_to_update=[],
+            indicators_to_update=stock_indicators_to_update,
             logger=logger,
         )
 
@@ -202,4 +206,7 @@ def generate_query(
         max_news_age=max_news_age,
     )
 
+    if prompt_to_clipboard:
+        pyperclip.copy(res)
+        logger.info("Copied the query to clipboard (Code: 42834092)")
     print(res)

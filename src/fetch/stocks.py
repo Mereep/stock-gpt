@@ -24,6 +24,7 @@ import yfinance
 
 from datatypes.stock_data import StockDataInfo, StockDataChartEntry
 from datatypes.stock_indicator import StockIndicators
+from exceptions.base import StockGptException
 from misc.stock_indicator_util import get_stock_indicator_by_id
 from repository.stock_indicator.i_stock_indicator_repository import IStockIndicatorRepository
 from repository.stock_value.i_stock_value_repository import IStockValueRepository
@@ -69,6 +70,9 @@ def load_stock_symbol_from_yfinance(
                            headers=YF_FINANCE_UA_HEADER)
 
     data = request.json()
+    if data['chart']['error']:
+        raise StockGptException(f"Error loading stock data for symbol {symbol}: {data['chart']['error']} (Code: 4289342)")
+
     indicators = data['chart']['result'][0]['indicators']['quote'][0]
     highs, lows, opens, closes, volumes = (
         indicators[key] for key in ('high', 'low', 'open', 'close', 'volume')

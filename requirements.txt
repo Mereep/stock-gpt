@@ -5,3 +5,4 @@ pydantic
 yfinance
 TA-Lib
 requests
+pyperclip
