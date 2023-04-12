@@ -189,6 +189,27 @@ python stock_gpt.py news update --symbol AAPL MSFT`
 ```bash
 python stock_gpt.py query generate --market_indicators_max_value_count 5 --stock_indicators_max_age 7 --stock_values_max_age 60 --max_news_age 14 --day 2023-04-10`
 ```
+
+## Contribute
+If you'd like to contribute: You're welcome :-)<br />
+Here is much to do, for example:
+- Unit Tests (yay, no Tests yet)
+- Prompt improvements
+  - which data to include?
+  - how much data?
+  - how to format the data?
+  - what to ask?
+  - different prompt goals (expected answers)
+  - potentially take different LLMs into Account
+- A graphical User Interface
+- Linting, Style Guides, etc.
+- Different data repositories (we only have CSV atm.)
+- Different data sources (how about article summaries etc?)
+- New indicators (market, stock (technical), fundamental
+- Other opinion sources (reddit, twitter, etc.)
+- Installation / setup
+- CI (bundle to executables ?)
+- ...
 ## Appendix
 ### Data
 The data is stored in the `data` directory. There are several subdirectories:
