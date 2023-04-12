@@ -1,0 +1,7 @@
+pandas
+numpy
+fredapi
+pydantic
+yfinance
+TA-Lib
+requests

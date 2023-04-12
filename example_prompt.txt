@@ -1,0 +1,106 @@
+Example of what will be generated for a stock symbol:
+
+
+Today is: 2023-04-12
+We want to do an analysis and find a strategy for the stock `TUP`. All values considered to be in USD $.
+The following basic information is available:
+- name: Tupperware Brands Corporation
+- sectors: ['Consumer Cyclical']
+- market cap: 115883216
+- pe ratio: None
+- dividend yield: None
+- beta: 2.257804
+- high 52 week: 21.1
+- low 52 week: 1.21
+- eps: -0.32
+
+
+The stock progression in (open, high, low, close, volume) format is:
+- 2022-06-01: (6.61,6.81,6.32,6.46,1033200)
+- 2022-06-15: (6.31,6.86,6.20,6.69,2993700)
+- 2022-07-01: (6.30,6.79,6.28,6.70,983500)
+- 2022-07-15: (6.33,6.67,6.29,6.67,866600)
+- 2022-08-01: (7.33,7.78,7.16,7.53,983200)
+- 2022-08-15: (11.86,12.34,11.51,12.25,839700)
+- 2022-09-01: (10.98,11.48,10.84,11.46,551100)
+- 2022-09-15: (9.29,9.59,8.85,8.91,1094000)
+- 2022-11-01: (7.85,8.00,7.69,7.73,779600)
+- 2022-11-15: (5.32,5.60,5.32,5.49,849700)
+- 2022-12-01: (4.63,4.82,4.55,4.59,753400)
+- 2022-12-15: (4.27,4.34,4.06,4.14,1179600)
+- 2023-02-01: (4.40,4.51,4.28,4.44,611400)
+- 2023-02-15: (4.13,4.42,4.08,4.37,953400)
+- 2023-03-01: (3.25,3.64,3.00,3.49,4189600)
+- 2023-03-13: (2.81,2.82,2.39,2.47,2516000)
+- 2023-03-14: (2.61,2.66,2.46,2.48,1984200)
+- 2023-03-15: (2.39,2.50,2.24,2.49,1863400)
+- 2023-03-16: (2.42,2.51,2.41,2.46,1203600)
+- 2023-03-17: (2.40,2.40,2.21,2.27,2414900)
+- 2023-03-20: (2.28,2.47,2.28,2.32,1140500)
+- 2023-03-21: (2.41,2.53,2.40,2.43,993900)
+- 2023-03-22: (2.43,2.46,2.28,2.29,1124800)
+- 2023-03-23: (2.32,2.41,2.30,2.36,1287000)
+- 2023-03-24: (2.27,2.32,2.26,2.28,919300)
+- 2023-03-27: (2.34,2.36,2.25,2.29,680400)
+- 2023-03-28: (2.29,2.38,2.28,2.31,805700)
+- 2023-03-29: (2.37,2.43,2.32,2.38,784000)
+- 2023-03-30: (2.41,2.42,2.34,2.38,532000)
+- 2023-03-31: (2.42,2.50,2.34,2.50,1148500)
+- 2023-04-03: (2.50,2.54,2.37,2.48,664300)
+- 2023-04-04: (2.50,2.53,2.36,2.48,793800)
+- 2023-04-05: (2.44,2.48,2.36,2.42,621700)
+- 2023-04-06: (2.43,2.44,2.36,2.42,718400)
+- 2023-04-10: (1.44,1.55,1.21,1.24,19194900)
+- 2023-04-11: (1.35,1.41,1.26,1.30,9732900)
+- 2023-04-12: (1.38,1.40,1.30,1.34,3276960)
+
+Some market indicators in format: `market indicator name: [(date: value), ...]` are given as follows:
+- DGORDER: [(2023-02-01: 268356.00),(2023-01-01: 271061.00),(2022-12-01: 285249.00)]
+- MANEMP: [(2023-03-01: 12983.00),(2023-02-01: 12984.00),(2023-01-01: 12985.00)]
+- T10Y2Y: [(2023-04-10: -0.59),(2023-04-07: -0.58),(2023-04-06: -0.52)]
+- WTISPLC: [(2023-03-01: 73.28),(2023-02-01: 76.83),(2023-01-01: 78.12)]
+- INDPRO: [(2023-02-01: 102.00),(2023-01-01: 102.02),(2022-12-01: 101.61)]
+- SPCS20RSA: [(2023-01-01: 300.36),(2022-12-01: 301.65),(2022-11-01: 303.26)]
+- TCU: [(2023-02-01: 79.11),(2023-01-01: 79.23),(2022-12-01: 79.02)]
+- BAMLH0A0HYM2: [(2023-04-06: 4.84),(2023-04-05: 4.84),(2023-04-04: 4.73)]
+- UNRATE: [(2023-03-01: 3.50),(2023-02-01: 3.60),(2023-01-01: 3.40)]
+- HOUST: [(2023-02-01: 1450.00),(2023-01-01: 1321.00),(2022-12-01: 1348.00)]
+- BAMLHE00EHYIOAS: [(2023-04-06: 4.89),(2023-04-05: 4.90),(2023-04-04: 4.75)]
+- EXUSUK: [(2023-03-01: 1.21),(2023-02-01: 1.21),(2023-01-01: 1.22)]
+- CPIAUCSL: [(2023-02-01: 301.65),(2023-01-01: 300.54),(2022-12-01: 298.99)]
+- FEDFUNDS: [(2023-03-01: 4.65),(2023-02-01: 4.57),(2023-01-01: 4.33)]
+- HSN1F: [(2023-02-01: 640.00),(2023-01-01: 633.00),(2022-12-01: 622.00)]
+- RSAFS: [(2023-02-01: 697876.00),(2023-01-01: 700682.00),(2022-12-01: 678815.00)]
+- VIXCLS: [(2023-04-06: 18.40),(2023-04-05: 19.08),(2023-04-04: 19.00)]
+- EXUSEU: [(2023-03-01: 1.07),(2023-02-01: 1.07),(2023-01-01: 1.08)]
+- TEDRATE: [(2022-01-21: 0.09),(2022-01-20: 0.08),(2022-01-19: 0.09)]
+- EXJPUS: [(2023-03-01: 133.66),(2023-02-01: 133.05),(2023-01-01: 130.45)]
+- USNIM: [(2020-07-01: 2.80),(2020-04-01: 2.89),(2020-01-01: 3.06)]
+- UMCSENT: [(2023-02-01: 67.00),(2023-01-01: 64.90),(2022-12-01: 59.70)]
+- M2SL: [(2023-02-01: 21062.50),(2023-01-01: 21183.50),(2022-12-01: 21325.20)]
+- EXCAUS: [(2023-03-01: 1.37),(2023-02-01: 1.35),(2023-01-01: 1.34)]
+- GDP: [(2022-10-01: 26137.99),(2022-07-01: 25723.94),(2022-04-01: 25248.48)]
+- BAMLH0A0HYM2EY: [(2023-04-06: 8.35),(2023-04-05: 8.35),(2023-04-04: 8.28)]
+
+Some stock related indicators in format: `date: [(stock indicator: value), ...]` are given as follows:
+- 2023-04-10: [(SMA50: 3.30),(SMA200: 5.97),(EMA50: 3.11),(EMA200: 5.99),(RSI: 17.70),(MACD: -0.34),(MACD_Signal: -0.33),(MACD_Hist: -0.01),(BB_Upper: 3.18),(BB_Middle: 2.21),(BB_Lower: 1.24),(SO_SlowK: 27.42),(SO_SlowD: 47.18),(ADX: 36.23),(Aroon_Oscillator: 28.57),(OBV: -21557100.00)]
+- 2023-04-11: [(SMA50: 3.25),(SMA200: 5.94),(EMA50: 3.04),(EMA200: 5.95),(RSI: 19.93),(MACD: -0.39),(MACD_Signal: -0.35),(MACD_Hist: -0.05),(BB_Upper: 3.12),(BB_Middle: 1.97),(BB_Lower: 0.82),(SO_SlowK: 16.36),(SO_SlowD: 31.56),(ADX: 38.34),(Aroon_Oscillator: 28.57),(OBV: -11824200.00)]
+
+
+The following news articles are available:
+- 2023-04-10: `Tupperware, Micron Technology, Capital One and other big movers ahead of Monday's stock market open` (Source: MarketWatch)
+- 2023-04-10: `Tupperware Stock Tumbles After It Issues a ‘Going-Concern’ Warning` (Source: Barron's)
+- 2023-04-10: `Fly Intel: Pre-market Movers` (Source: Thefly.com)
+- 2023-04-10: `Tupperware Stock (TUP) Slumps on Hiring Advisers Amid Capital ... - Bloomberg` (Source: Google News)
+- 2023-04-10: `Tupperware stock plunges after warning it could go out of business` (Source: Biztoc.com)
+- 2023-04-10: `UPDATE: Tupperware's stock slides 38% premarket in wake of going-concern warning` (Source: Biztoc.com)
+- 2023-04-10: `: Tupperware’s stock craters after food-storage company warns it may go bust` (Source: MarketWatch)
+- 2023-04-10: `Tupperware’s stock craters after food-storage company warns it may go bust` (Source: Biztoc.com)
+- 2023-04-10: `Beloved Household Stock Could Be Dangerously Close to Going Out of Business` (Source: Biztoc.com)
+- 2023-04-10: `Lawsuit Alert: Investors who lost over $100,000 with shares of Tupperware Brands Corporation (NYSE: TUP) between March 2021 and March 2023 should contact the Shareholders Foundation` (Source: GlobeNewswire)
+- 2023-04-10: `Tupperware’s stock craters after food-storage company warns it may go bust` (Source: Biztoc.com)
+- 2023-04-11: `Markets Mixed With Inflation Data and Earnings Ahead` (Source: Investopedia)
+- 2023-04-11: `TUPPERWARE BRANDS CORPORATION (NYSE: TUP) SHAREHOLDER CLASS ACTION ALERT: Bernstein Liebhard LLP Reminds Investors of the Deadline to File a Lead Plaintiff Motion in a Securities Class Action Lawsuit Against Tupperware Brands Corporation (NYSE: TUP)` (Source: GlobeNewswire)
+- 2023-04-11: `Tupperware Brands stock tumbles on delisting risk, advisor engagement (NYSE:TUP)` (Source: Biztoc.com)
+- 2023-04-11: `Tupperware stock plunges after warning it could go out of business` (Source: Biztoc.com)
+- 2023-04-11: `Thinking about buying stock in WW International, Getty Images, Kingsoft Cloud, Tupperware Brands, or Tetra Technologies?` (Source: PRNewswire)

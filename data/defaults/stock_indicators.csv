@@ -1,0 +1,17 @@
+id,name,active
+SMA50,Simple Moving Average 50,1
+SMA200,Simple Moving Average 200,1
+EMA50,Exponential Moving Average 50,1
+EMA200,Exponential Moving Average 200,1
+RSI,Relative Strength Index,1
+MACD,Moving Average Convergence Divergence,1
+MACD_Signal,MACD Signal Line,1
+MACD_Hist,MACD Histogram,1
+BB_Upper,Bollinger Bands Upper,1
+BB_Middle,Bollinger Bands Middle,1
+BB_Lower,Bollinger Bands Lower,1
+SO_SlowK,Stochastic Oscillator Slow K,1
+SO_SlowD,Stochastic Oscillator Slow D,1
+ADX,Average Directional Index,1
+Aroon_Oscillator,Aroon Oscillator,1
+OBV,On-Balance Volume,1

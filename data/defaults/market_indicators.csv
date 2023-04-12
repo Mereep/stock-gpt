@@ -1,0 +1,34 @@
+id,name,active
+GDP,Gross Domestic Product,1
+UNRATE,Unemployment Rate,1
+CPIAUCSL,Consumer Price Index for All Urban Consumers,1
+FEDFUNDS,Federal Funds Rate,1
+ISM_MFR_PMI,ISM Manufacturing PMI,0
+UMCSENT,University of Michigan Consumer Sentiment,1
+HMI,Housing Market Index,0
+VIXCLS,CBOE Volatility Index,1
+SP500ADL,S&P 500 Advance Decline Line,0
+T10Y2Y,10-Year Treasury Constant Maturity Minus 2-Year Treasury Constant Maturity,1
+INDPRO,Industrial Production Index,1
+TCU,Total Capacity Utilization,1
+RSAFS,Advance Retail Sales,1
+DGORDER,Manufacturers' New Orders: Durable Goods,1
+HOUST,New Privately-Owned Housing Units Started,1
+HSN1F,New One Family Houses Sold,1
+MANEMP,All Employees: Manufacturing,1
+PCUAD--AD--AD,Producer Price Index: All Commodities,0
+NAPMNONMFG,ISM Non-Manufacturing PMI,0
+SPCS20RSA,S&P/Case-Shiller 20-City Composite Home Price Index,1
+M2SL,M2 Money Stock,1
+WTISPLC,West Texas Intermediate Spot Price,1
+EXUSEU,US / Euro Foreign Exchange Rate,1
+EXJPUS,US / Japan Foreign Exchange Rate,1
+EXCAUS,US / Canada Foreign Exchange Rate,1
+EXUSUK,US / UK Foreign Exchange Rate,1
+BAMLH0A0HYM2,ICE BofA US High Yield Index Option-Adjusted Spread,1
+BAMLH0A0HYM2EY,ICE BofA US High Yield Index Effective Yield,1
+BAMLHE00EHYIOAS,ICE BofA Euro High Yield Index Option-Adjusted Spread,1
+BAMLHE00EHYIOA,ICE BofA Euro High Yield Index Option-Adjusted All,0
+TEDRATE,TED Spread,1
+USNIM,Net Interest Margin,1
+OILPRODCOMWORLD,Oil Production,0
