@@ -173,13 +173,13 @@ def generate_gpt_query(symbol: str,
 
     for news_article in relevant_news:
         query += "- {date}: `{title}`\n{content}(Source: {source})\n".format(title=news_article.title,
-                                                                               source=news_article.source,
-                                                                               content='',# 'Content: ' + news_article.summary + '\n' or '',
-                                                                               date=news_article.published_at.strftime(
-                                                                           "%Y-%m-%d"))
+                                                                             source=news_article.source,
+                                                                             content='', # 'Content: ' + news_article.summary + '\n' or '',
+                                                                             date=news_article.published_at.strftime(
+                                                                             "%Y-%m-%d"))
     query += "\n\n"
     query += """
-What are the bearish, neutral and bullish factors? Rate them in a scale (1 to 5 = important). Include the news headlines as appropriate. 
+Act as a stock market professional. What are the bearish, neutral and bullish factors? Rate them in a scale (1 to 5 = important). Include the news headlines as appropriate. 
 Conclude a short term investment strategy (max. 1 month) with buy signal, sell signal, rebuy signal and stop loss. 
 If appropriate, that might be a shorting strategy as well. Estimate the success rate for a positive yield in a range from 1 to 10. 
 """

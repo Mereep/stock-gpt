@@ -1,26 +1,74 @@
 # ChatGPT Query Generator
 
-This code provides a command-line interface for collecting and analyzing stock market data, as well as generating queries for Language Models such as ChatGPT. 
+This code provides a command-line interface for collecting and analyzing stock market data, as well as generating queries for Large Language Models such as ChatGPT. 
 
 <hr>
 <b>Disclaimer:</b>
 This code is not meant to be used for trading or investment purposes. It is meant for educational purposes only.
 No investment advice is provided or implied. The author is not responsible for any losses or gains that may occur from using this software or parts thereof. <br />
-Respect the licences.
+<br />
+Also: Respect the licences.
 <hr>
 However, if you find this code useful, please consider thinking of me :-)
 
 ## Overview
 The main purpose of this code is to provide a command-line interface to collect and analyze stock market data. 
 It has various commands and subcommands for collecting stock market data, market indicators, news articles, 
-and stock indicators. Additionally, it has a command to generate a query meant for ChatGPT (or generally LLM) query based on the data collected.
+and stock indicators. <br />
+<br />
+Additionally, StockGPT provides a command to generate a query meant for ChatGPT (or generally Large Language Models) 
+based on the data collected in order to generate stock insights, analysis and predictions. <br />
+
+### Graphical workflow overview 
+```mermaid
+graph TD
+  src["🌍 Data Sources"] --> news["📰 News"]
+  src --> chtd["📈 Chart Data"]
+  src --> stki["📊 Stock Infos"]
+  src --> mkdi["🔹 Market Indicators"]
+  src --> more["⋯"]
+  news --> stor["💽 Data Storage"]
+  chtd --> stor
+  stki --> stor
+  mkdi --> stor
+  more --> stor
+  stor --> dext["🔗 Data Extension (e.g. Technical Indicators)"]
+  dext --> dagr["⚙️ Data Aggregation"]
+  dagr --> qgen["️📈️ 📊 LLM Query / Prompt Generation 🔹 📰 "]
+  qgen --> llmc["🤖 LLM, e.g. ChatGPT"]
+  llmc --> oana["📑 Outcome Analysis"]
+  llmc --> pred["🔮 Predictions"]
+
+  subgraph "Data Warehousing"
+    src
+    news
+    chtd
+    stki
+    mkdi
+    more
+    stor
+    dext
+  end
+
+  subgraph "Query Building"
+    dagr
+    qgen
+  end
+
+  subgraph "Usage"
+    llmc
+    oana
+    pred
+  end
+```
+
 ### Information Included in the Query
-- Stock Symbol Trend Information (open, closes, volume etc.) in different resolutions (fetched from `yfinance`)
-- Basic Stock Info as in eps, 52 week high / low, market cap, sector etc.  (fetched from `yfinance`)
-- Market Indicators (e.g. unemployment rate, inflation rate; over 20 at the time of writing) (fetched from the FRED API; see below)
+- Stock Symbol Trend Information (open, closes, volume etc.) in different resolutions. (fetched from `yfinance`).
+- Basic Stock Info as in eps, 52 week high / low, market cap, sector etc,  (fetched from `yfinance`).
+- Market Indicators (e.g. unemployment rate, inflation rate; over 20 at the time of writing). (fetched from the FRED API; see below)
 - Technical Indicators (e.g. RSI, MACD, Bollinger Bands etc.) calculated using `TA-Lib` (based on the stock trend information)
-- News Articles headlines (fetched from the News API; see below) 
-- an example prompt for ChatGPT / LLMs for analysing the stock
+- News Articles headlines. (fetched from the News API; see below) 
+- An example task for ChatGPT / LLMs for analysing the stock.
 ### General Workflow
 The workflow is generally as follows:<br /><br />
 **Once per day:**
@@ -30,6 +78,7 @@ The workflow is generally as follows:<br /><br />
 4. Calculate stock indicators using the `stock-indicators update` command. <br /> <br />
 As often as you want:<br />
 5. Generate a ChatGPT query using the `query generate` command.
+6. Feed it your LLM and get insights, analysis and predictions.
 #### **Shortcut / TLDR**
 If you want to go the easy road, just use as follows (example for Microsoft Stock) after installing the dependencies:
 ```bash
@@ -38,7 +87,7 @@ STOCKGPT_NEWS_API_KEY=... STOCKGPT_FRED_API_KEY... python stock_gpt.py query gen
 This will update everything related to the symbol and generate a query for it. Be aware you do not have to update
 the symbol every time. You can use specific commands to update your repository as described below.
 ### Sharing is caring
-Feel free to modify the query and feed back results that work best for you. We are all learning.
+Feel free to modify the query and feed back results that work best for you. We are all learning. 🎓
 ## Setup
 ### Clone the Repository
 First, clone or download the repository, e.g.:
