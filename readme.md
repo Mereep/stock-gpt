@@ -155,7 +155,7 @@ The query command generates a ChatGPT query based on the given parameters.
 **Usage:**
 
 ```bash
-query generate --symbol [--update_symbol UPDATE_SYMBOL] [--market_indicators_max_value_count MAX_VALUE_COUNT] [--stock_indicators_max_age MAX_AGE] [--stock_values_max_age MAX_AGE] [--max_news_age MAX_AGE] [--day DAY]
+query generate --symbol [--update_symbol UPDATE_SYMBOL] [--max-news-count MAX_NEWS_COUNT] [--market_indicators_max_value_count MAX_VALUE_COUNT] [--stock_indicators_max_age MAX_AGE] [--stock_values_max_age MAX_AGE] [--max_news_age MAX_AGE] [--day DAY]
 ```
     --symbol: The stock symbol for the query. Required. 
     --update-symbol: Whether to update the stock symbol data before generating the query. Defaults to False.
@@ -165,6 +165,7 @@ query generate --symbol [--update_symbol UPDATE_SYMBOL] [--market_indicators_max
     --max-news-age: The maximum age of news articles in days. Defaults to 7.
     --day: The date in the format `YYYY-MM-DD` for the query. Defaults to the current date.
     --top-clipboard: Whether to copy the generated query to the clipboard. Defaults to False. 
+    --max-news-count: The maximum number of news articles to consider. Defaults to 7.
 ## Examples
 - Collect / Update specific stock symbols (e.g., AAPL and MSFT) with data from the last 30 days: 
 ```bash

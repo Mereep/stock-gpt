@@ -33,7 +33,7 @@ def fetch_latest_stock_news(stock_symbol: str,
     # Set up the endpoint and parameters
     url = 'https://newsapi.org/v2/everything'
     params = {
-        'q': f'({stock_symbol} stock)'+f' OR {stock_name}' if stock_name else '',
+        'q': f'({stock_symbol} stock)'+(f' OR ({stock_name} stock)' if stock_name else ''),
         'sortBy': 'publishedAt',
         'apiKey': api_key,
         'language': 'en',
@@ -55,7 +55,7 @@ def fetch_latest_stock_news(stock_symbol: str,
                 source=article['source']['name'],
                 published_at=datetime.datetime.fromisoformat(article['publishedAt']),
                 url=article['url'],
-                summary=article['content'] or article['description'],
+                summary=article['description'],
             )
             for article in articles
         ]

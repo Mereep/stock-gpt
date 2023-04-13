@@ -123,17 +123,19 @@ def generate_gpt_query(symbol: str,
     relevant_news = relevant_news[:max_news_count]
 
     query = "Today is: {}\n".format(for_date.strftime("%Y-%m-%d"))
-    query += "We want to do an analysis and find a strategy for the stock `{symbol}`. All values considered to be in USD $.\n".format(
-        symbol=symbol)
+    query += "The following description describes the stock `{symbol}` " \
+             "including technical indicators, news, and general information:\n".format(symbol=symbol)
+    #query += "We want to do an analysis and find a strategy for the stock `{symbol}`. All values considered to be in USD $.\n".format(
+    #    symbol=symbol)
     query += "The following basic information is available:\n"
     for key, value in asdict(info).items():
         query += "- {}: {}\n".format(key.replace('_', ' '), value)
     query += "\n\n"
-    query += "The stock progression in (open, high, low, close, volume) format is:\n"
+    query += "The stock progression in date: (open, high, low, close, volume); ... format is:\n"
     for date, stock_value in relevant_stock_values.items():
         date_str = date.strftime("%Y-%m-%d")
 
-        query += "- {date}: ({open:.2f},{high:.2f},{low:.2f},{close:.2f},{volume:})\n".format(
+        query += "{date}: ({open:.2f},{high:.2f},{low:.2f},{close:.2f},{volume:}); ".format(
             open=stock_value.open,
             high=stock_value.high,
             low=stock_value.low,
@@ -142,7 +144,7 @@ def generate_gpt_query(symbol: str,
             date=date_str,
         )
 
-    query += "\nSome market indicators in format: `market indicator name: " \
+    query += "\n\nSome market indicators in format: `market indicator name: " \
              "[(date: value), ...]` are given as follows: \n"
     for market_indicator, values in relevant_market_indicators.items():
         query += "- {}: [".format(market_indicator)
@@ -170,16 +172,15 @@ def generate_gpt_query(symbol: str,
         query += "- No news available\n"
 
     for news_article in relevant_news:
-        query += "- {date}: `{title}\n{content}`\n(Source: {source})\n".format(title=news_article.title,
-                                                                              source=news_article.source,
-                                                                              content=news_article.summary or '',
-                                                                              date=news_article.published_at.strftime(
+        query += "- {date}: `{title}`\n{content}(Source: {source})\n".format(title=news_article.title,
+                                                                               source=news_article.source,
+                                                                               content='',# 'Content: ' + news_article.summary + '\n' or '',
+                                                                               date=news_article.published_at.strftime(
                                                                            "%Y-%m-%d"))
     query += "\n\n"
     query += """
-Please summarize the stock in terms of bearish, bullish and neutral factors. Rate each single factor range 1..5 where 1 = not so important, 5 = very important. 
-Judge on the news headlines. Conclude if an short term investment or shorting (up tp max 14 days) seems a good bet. 
-Importantly, add a score from 1%..100% (estimated chances for gain) and suggest a short term investment strategy (including buy signal, rebuy signal, sell signal).
-Estimate the amount of days for best success / risk value and a suggested stop loss. 
-    """
+What are the bearish, neutral and bullish factors? Rate them in a scale (1 to 5 = important). Include the news headlines as appropriate. 
+Conclude a short term investment strategy (max. 1 month) with buy signal, sell signal, rebuy signal and stop loss. 
+If appropriate, that might be a shorting strategy as well. Estimate the success rate for a positive yield in a range from 1 to 10. 
+"""
     return query
