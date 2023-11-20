@@ -35,6 +35,7 @@ class AppConfig:
     """
     fred_api_key: str | None = dataclasses.field(default=None)
     news_api_key: str | None = dataclasses.field(default=None)
+    _omit_api_key_check: bool = dataclasses.field(default=False)
 
     data_base_dir: str = dataclasses.field(
         default=(Path(__file__).parent.parent.parent / 'data').absolute())
@@ -67,13 +68,14 @@ class AppConfig:
         return self.data_base_dir / 'stock_data' / 'stock_indicators'
 
     @classmethod
-    def from_env(cls) -> 'Self':
+    def from_env(cls, omit_api_key_check: bool = False) -> 'Self':
         collected_env = {}
         for key in [key for key in cls.__dict__.keys() if not key.startswith('_')]:
             env_name = f'STOCKGPT_{key.upper()}'
             if env_name in os.environ:
                 collected_env[key] = os.environ[env_name]
-        return cls(**collected_env)
+        self = cls(**collected_env, _omit_api_key_check=omit_api_key_check)
+        return self
 
     def __post_init__(self):
         required_paths = {
@@ -105,10 +107,11 @@ class AppConfig:
             defaults = read_stock_indicator_defaults(self.default_stock_indicator_dictionary_file)
             self.default_stock_indicators = list(defaults.keys())
 
-        if self.fred_api_key is None or not self.fred_api_key:
-            raise StockGptConfigException("No FRED API key given (use environment the variable"
-                                          " STOCKGPT_FRED_API_KEY) (Code: 3940ß29340)")
+        if not self._omit_api_key_check:
+            if self.fred_api_key is None or not self.fred_api_key:
+                raise StockGptConfigException("No FRED API key given (use environment the variable"
+                                              " STOCKGPT_FRED_API_KEY) (Code: 3940ß29340)")
 
-        if self.news_api_key is None or not self.news_api_key:
-            raise StockGptConfigException("No News API key given (use environment the variable"
-                                          " STOCKGPT_NEWS_API_KEY) (Code: 3249823094)")
+            if self.news_api_key is None or not self.news_api_key:
+                raise StockGptConfigException("No News API key given (use environment the variable"
+                                              " STOCKGPT_NEWS_API_KEY) (Code: 3249823094)")

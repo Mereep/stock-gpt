@@ -220,4 +220,5 @@ def generate_query(
     if prompt_to_clipboard:
         pyperclip.copy(res)
         logger.info("Copied the query to clipboard (Code: 42834092)")
+
     print(res)

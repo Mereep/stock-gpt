@@ -19,6 +19,6 @@
 import datetime
 import typing
 
-""" read as date -> {indicator_name -> indicator_value} """
+""" read as: date -> {indicator_name -> indicator_value} """
 StockIndicators = typing.NewType('StockIndicators',
                                  dict[datetime.date, dict[str, float]])

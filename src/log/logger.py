@@ -20,6 +20,7 @@ import logging
 _STOCKGPT_LOGGER = None
 _CLI_LOGGER = None
 _FRED_API_LOGGER = None
+_UI_LOGGER = None
 
 
 def get_default_logger() -> logging.Logger:
@@ -63,3 +64,13 @@ def get_default_cli_logger() -> logging.Logger:
         _CLI_LOGGER = logger.getChild("cli")
 
     return _CLI_LOGGER
+
+
+def get_ui_logger() -> logging.Logger:
+    """Get the UI logger"""
+    global _UI_LOGGER
+    if _UI_LOGGER is None:
+        logger = get_default_logger()
+        _UI_LOGGER = logger.getChild("ui")
+
+    return _UI_LOGGER

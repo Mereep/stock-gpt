@@ -35,17 +35,17 @@ def build_fred(app_config: AppConfig) -> Fred:
 
 
 def get_indicator(
-                logger: logging.Logger,
-                app_config: AppConfig, indicator_id: str,
-                from_date: datetime.date | None = None,
-                to_date: datetime.date | None = None) -> MarketIndicator:
+        logger: logging.Logger,
+        app_config: AppConfig, indicator_id: str,
+        from_date: datetime.date | None = None,
+        to_date: datetime.date | None = None) -> MarketIndicator:
     """ Get the indicator with the given ID from the FRED API  """
     fred = build_fred(app_config)
     logger.info(f'Fetching indicator {indicator_id} from FRED API (Code: 324234820)')
     indicator: pd.Series = fred.get_series(indicator_id,
-                                observation_start=from_date,
-                                observation_end=to_date
-    )
+                                           observation_start=from_date,
+                                           observation_end=to_date
+                                           )
 
     return MarketIndicator({datetime.date(year=k.year,
                                           month=k.month,

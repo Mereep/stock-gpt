@@ -2,7 +2,7 @@ pandas
 numpy
 fredapi
 pydantic
-yfinance
+yfinance>=0.2.32
 TA-Lib
 requests
 pyperclip

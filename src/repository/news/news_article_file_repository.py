@@ -30,6 +30,7 @@ import gettext
 
 _ = gettext.gettext
 
+
 class NewsArticleFileRepository(INewsArticleRepository):
     _base_path: Path
 
@@ -46,11 +47,12 @@ class NewsArticleFileRepository(INewsArticleRepository):
         if effective_path.exists():
             df = pd.read_csv(effective_path, index_col=None, parse_dates=['published_at'])
             return TNewsArticles([NewsArticle(title=row['title'],
-                                source=row['source'],
-                                published_at=datetime.datetime.fromtimestamp(row['published_at'].timestamp()),
-                                url=row['url'],
-                                summary=row['summary'] if not pd.isna(row['summary']) else None)
-                    for _, row in df.iterrows()])
+                                              source=row['source'],
+                                              published_at=datetime.datetime.fromtimestamp(
+                                                  row['published_at'].timestamp()),
+                                              url=row['url'],
+                                              summary=row['summary'] if not pd.isna(row['summary']) else None)
+                                  for _, row in df.iterrows()])
         else:
             return None
 
